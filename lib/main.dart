@@ -1,3 +1,4 @@
+import 'package:cardcreates/widget/item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -27,6 +28,33 @@ class CardsCarousel extends StatefulWidget {
   @override
   State<CardsCarousel> createState() => _CardsCarouselState();
 }
+
+List<Map<String, dynamic>> data = [
+  {
+    'card_no': '*****4013',
+    'amount': '\$2,562',
+    'bgcolor': Colors.white,
+    'icon': Icons.circle_rounded,
+  },
+  {
+    'card_no': '*****1941',
+    'amount': '\$144,99',
+    'bgcolor': Colors.red,
+    'icon': Icons.circle_rounded,
+  },
+  {
+    'card_no': '*****6132',
+    'amount': '\$2,562',
+    'bgcolor': Colors.orange,
+    'icon': Icons.circle_rounded,
+  },
+  {
+    'card_no': '*****9090',
+    'amount': '\$2,562',
+    'bgcolor': Colors.blue,
+    'icon': Icons.circle_rounded
+  },
+];
 
 class _CardsCarouselState extends State<CardsCarousel> {
   @override
@@ -59,73 +87,26 @@ class _CardsCarouselState extends State<CardsCarousel> {
         Container(
           padding: EdgeInsets.zero,
           margin: const EdgeInsets.all(30),
-
-          //decoration:
-          //  BoxDecoration(border: Border.all(color: Colors.blueAccent)),
-          color: Colors.yellow,
           child: CarouselSlider(
             options: CarouselOptions(
               enlargeCenterPage: true,
               height: 400.0,
-              viewportFraction: 0.4,
+              viewportFraction: 0.3,
               autoPlay: true,
               autoPlayInterval: const Duration(seconds: 3),
               autoPlayAnimationDuration: const Duration(milliseconds: 500),
             ),
-            items: [
-              {
-                'card_no': '*****4013',
-                'amount': '\$2,562',
-                'bgcolor': Colors.white,
-                'icon': const Icon(Icons.circle_rounded)
-              },
-              {
-                'card_no': '*****1941',
-                'amount': '\$144,99',
-                'bgcolor': Colors.red,
-                'icon': const Icon(Icons.circle_rounded)
-              },
-              {
-                'card_no': '*****6132',
-                'amount': '2,562',
-                'bgcolor': Colors.orange,
-                'icon': const Icon(Icons.circle_rounded)
-              },
-              {
-                'card_no': '*****9090',
-                'amount': '2,562',
-                'bgcolor': Colors.blue,
-                'icon': const Icon(Icons.circle_rounded)
-              },
-            ].map((i) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return Container(
-                    width: 300,
-                    padding: const EdgeInsets.all(16),
-                    decoration: const BoxDecoration(),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            '${i['card_no']}',
-                            style: const TextStyle(fontSize: 16.0),
-                          ),
-                        ),
-                        Text('${i['amount']}'),
-                      ],
-                    ),
-                  );
-                },
-              );
+            items: data.map((e) {
+              return ItemCard(
+                  cardNo: e['card_no'],
+                  amount: e['amount'],
+                  color: e['bgcolor'],
+                  icon: e['icon']);
             }).toList(),
           ),
         ),
         Container(
-          padding: const EdgeInsets.all(1.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
               Row(
@@ -137,7 +118,7 @@ class _CardsCarouselState extends State<CardsCarousel> {
                   ),
                   Text(
                     "       History",
-                    style: TextStyle(fontSize: 30, color: Colors.black),
+                    style: TextStyle(fontSize: 30, color: Colors.black26),
                   )
                 ],
               ),
